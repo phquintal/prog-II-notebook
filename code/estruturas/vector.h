@@ -17,12 +17,20 @@ void push_back(Vector* v, void* elem);
 void remove_elem(Vector* v, void* elem); 
 
 // Retorna um ponteiro para os dados do elemento de índice `index`
-void* elem_at(Vector* v, int index);
+void* get_elem_at(Vector* v, int index);
 
 
 // ----------------------
 //   Funções Adicionais
 // ----------------------
 
-void increase_vector_capacity(Vector* v);
+// Funções que não fazem parte da interface original mostrada nas aulas, mas que implementei como utilidades
+
 unsigned get_vector_size(Vector* v);
+
+bool get_vector_order(Vector* v);
+
+// Insere cada elemento de um vetor estático em um vetor dinâmico
+void append_array_to_vec(Vector* v, void* arr, unsigned n);
+
+void print_vector_int(Vector* v, void* arr, unsigned n);

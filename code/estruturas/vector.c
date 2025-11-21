@@ -31,6 +31,7 @@ void free_vector(Vector* v) {
 }
 
 void push_back(Vector* v, void* elem) {
+    assert(v != NULL);
     LOGF("[DEBUG] Inserindo no indice %d\nv->capacity: %d\n", v->n, v->capacity);
     if (v->n >= v->capacity) {
         LOGF("[DEBUG] Expandindo vetor para ");
@@ -46,7 +47,7 @@ void push_back(Vector* v, void* elem) {
     v->n++;
 }
 
-void* elem_at(Vector* v, int index) {
+void* get_elem_at(Vector* v, int index) {
     LOGF("Acessando elemento de índice %d\n", index);
     assert(index < v->n);
 
