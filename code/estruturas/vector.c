@@ -59,3 +59,45 @@ void* get_elem_at(Vector* v, int index) {
 unsigned get_vector_size(Vector* v) {
     return v->n;
 }
+
+// Usa função `memcmp` para comparar os blocos de memória de cada elemento do vetor já que não se sabe o tipo de dado guardado nele até então
+int get_vector_order(Vector* v) {
+    assert(v != NULL);
+
+    // Todos os elementos de um vetor de só um elemento são iguais
+    if (v->n <= 1) return TUDO_IGUAL;
+
+    int order = TUDO_IGUAL;
+    for (int i = 0; i < v->n-1; i++) {
+        
+        // A função `memcpm` recebe dois ponteiros void e o tamanho do bloco a ser comparado.
+        // Ela retorna a diferença lexográfica entre os dois blocos, que então é guardada na variável `compare`
+        int compare = memcmp(get_elem_at(v, i), get_elem_at(v, i+1), v->elemSize);
+
+        // Se compare for menor que 0, o valor do primeiro bloco é menor que o do segundo. Então a ordem é crescente
+        // Se não, se compare for
+        if (compare < 0)
+            order = ORDEM_CRESCENTE; 
+        else if (compare > 0)
+            order = ORDEM_DECRESCENTE;
+        else
+            order = TUDO_IGUAL;
+
+        // O loop continua até que se encontrem dois elementos em que um não é igual ao outro.
+        if (order != TUDO_IGUAL) break;
+    }
+    
+    // Se a ordem ainda for a mesma, quer dizer que todas as comparações dentro do vetor deram que os elementos são iguais.
+    if (order == TUDO_IGUAL) return TUDO_IGUAL;
+
+    for (int i = 0; i < v->n-1; i++) {
+        if (memcmp(get_elem_at(v, i), get_elem_at(v, i+1), v->elemSize) != order) return SEM_ORDEM;
+    }
+    return order;
+}
+
+void append_array_to_vec(Vector* v, void* arr, unsigned n) {
+    for (int i = 0; i < n; i++) {
+        push_back(v, (char*)arr + i * v->elemSize);
+    }
+}

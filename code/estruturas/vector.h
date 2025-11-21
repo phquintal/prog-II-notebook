@@ -1,6 +1,13 @@
 #pragma once
 
 #include <stdlib.h>
+#include <stdbool.h>
+
+// Valores de ordem do vetor retornados pela função `get_vector_order`
+#define ORDEM_CRESCENTE -1
+#define TUDO_IGUAL 0
+#define ORDEM_DECRESCENTE 1
+#define SEM_ORDEM 2
 
 typedef struct Vector Vector;
 
