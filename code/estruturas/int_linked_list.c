@@ -8,6 +8,7 @@
 
 Node* new_node(int val) {
     Node* newNode = malloc(sizeof(Node));
+    newNode->data = val;
     newNode->next = NULL;
     return newNode;
 }
@@ -33,6 +34,20 @@ void it_free_list(Node* head) {
         free(cur);
         cur = next;
     }
+}
+
+Node* push_node(Node* head, Node* node, bool back) {
+    if (back == false) {
+        node->next = head;
+        return node;   
+    }
+
+    Node* current = head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = node;
+    return head;
 }
 
 void print_list(Node* head, bool firstPrint) {

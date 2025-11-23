@@ -11,7 +11,7 @@ Node* new_node(int val);
 
 void free_list(Node* head);
 
-void print_list(Node* head);
+void print_list(Node* head, bool firstPrint);
 
 // Insere um novo nó na frente da lista se `back` é `false` ou no final da lista se `back` é `true`
 Node* push_node(Node* head, Node* node, bool back);
