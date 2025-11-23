@@ -2,11 +2,12 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define CAPACIDADE_INICIAL 4
 
-#define DEBUG
-#include "debug.h"
+// #define DEBUG
+#include "helper/debug.h"
 
 struct Vector {
     unsigned n;
@@ -60,7 +61,13 @@ unsigned get_vector_size(Vector* v) {
     return v->n;
 }
 
-// Usa função `memcmp` para comparar os blocos de memória de cada elemento do vetor já que não se sabe o tipo de dado guardado nele até então
+#pragma region
+// AVISO: A função abaixo foi implementada por teimosia minha, mas provavelmente não vamos ter que implementar nada tão complicado esse semestre.
+// O uso de `memcmp` é para comparar blocos de memória "crus" e retornar a diferença entre eles.
+// Nessa implementação, está servindo para dizer em qual ordem o vetor está, mesmo sem saber de que tipo ele é de antemão.
+// Ter uma função para isso ajuda em fazer funções de busca binária mais seguras, mas não é algo que eu ache que seja importante pra matéria.
+
+// Usa a função `memcmp` para comparar os blocos de memória de cada elemento do vetor já que não se sabe o tipo de dado guardado nele até então
 int get_vector_order(Vector* v) {
     assert(v != NULL);
 
@@ -95,9 +102,18 @@ int get_vector_order(Vector* v) {
     }
     return order;
 }
+#pragma endregion
 
 void append_array_to_vec(Vector* v, void* arr, unsigned n) {
     for (int i = 0; i < n; i++) {
         push_back(v, (char*)arr + i * v->elemSize);
     }
+}
+
+void print_vector_int(Vector* v, const char* vecname) {
+    printf("%s: ", vecname);
+    for (int i = 0; i < get_vector_size(v); i++) {
+        printf("%d ", *(int*)get_elem_at(v, i));
+    }
+    printf("\n");
 }

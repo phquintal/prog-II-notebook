@@ -35,9 +35,12 @@ void* get_elem_at(Vector* v, int index);
 
 unsigned get_vector_size(Vector* v);
 
-bool get_vector_order(Vector* v);
+// Opcional, provável que não tenhamos que implementar
+// Retorna um dos valores definidos acima para indicar se o vetor está em ordem.
+// Resultados possíveis: crescente, decrescente, todos os elementos são iguais ou sem ordem
+int get_vector_order(Vector* v);
 
 // Insere cada elemento de um vetor estático em um vetor dinâmico
 void append_array_to_vec(Vector* v, void* arr, unsigned n);
 
-void print_vector_int(Vector* v, void* arr, unsigned n);
+void print_vector_int(Vector* v, const char* vecname);
